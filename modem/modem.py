@@ -15,12 +15,12 @@ def load_wav() -> int | list[int]:
     fs, data = read(args.input)
     if args.verbose:
         print(f"    sample rate: {fs}")
-        #print(f"number of channels = {data.shape[1]}")
         length = data.shape[0] / fs
         print(f"    length:      {length:.2f}s")
 
     return fs, data
 
+# Compute one I/Q pair per block (at each candidate frequency)
 def tone_power(samples, N, f, fs):
     I = 0
     Q = 0
@@ -30,6 +30,7 @@ def tone_power(samples, N, f, fs):
         Q = Q + samples[n] * np.sin(angle)
     return np.square(I) + np.square(Q)
 
+# write message to file
 def write(list):
     with open("message.txt", "w") as f:
         f.write(''.join(list) + '\n')
@@ -48,8 +49,6 @@ def main():
     total_bits = data.shape[0] // 160
     # for i in number of bits send to tone_power
     for i in range(total_bits):
-        if args.verbose: 
-            print(f"Bit: {i}")
         # calculate start and end point of the bit
         start = i * 160
         end = start + 160
@@ -57,33 +56,33 @@ def main():
         bit = data[start:end]
         # convert 
         bit = bit.astype(np.float64) / 32768.0
-        # set Power to the return from the function
+        # set mark/space (power) to the return from the function
         mark = tone_power(bit, 160, f1, fs)
         space = tone_power(bit, 160, f2, fs) 
 
-        if args.verbose: 
-            print(f"    power1: {mark}")
-            print(f"    power2: {space}")
-
+        # 10 bits: 1 start bit + 8 data bits + 1 stop bit
+        # logic omits first and last bits, saving 8 middle bits
         if j == 0: 
             newlist = []
             j += 1
         elif j > 0 and j < 9:
+            # if power level representing mark bit is larger, 
+            # write a 1 into list and vice versa
             if (mark > space):
                 newlist.insert(0, "1")
             else:
                 newlist.insert(0, "0")
             j += 1
         else:
-            # convert and append
+            # all 8 bits collected, convert and append
             result = "".join(newlist)
             int_result = int(result, 2)
             chr_result = chr(int_result)
             message.append(chr_result)
             j = 0
 
+    # write to output file
     write(message) 
-
 
 
 if __name__=="__main__":
