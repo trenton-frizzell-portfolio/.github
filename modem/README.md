@@ -1,4 +1,5 @@
 # modem.py
+
 This program decodes audio files encoded using the Bell 103 modem protocol and outputs the decoded ASCII message to message.txt.
 
 Reads a 48kHz 16-bit mono WAV file using scipy.io.wavfile
@@ -28,11 +29,9 @@ trentonfrizzell@trentons-MacBook-Pro 02 % cat message.txt
 You will engage in a profitable business activity.
 ```
 
-What Is Still To Be Done
-The program is complete per the assignment requirements. Possible extensions noted in the assignment extras include proper synchronization, realtime full-duplex operation, and POTS line simulation.
-
 ## Usage
-python3 modem.py [-h] [-v] input
+
+`python3 modem.py [-h] [-v] input`
 
 input — path to the input WAV file
 -v, --verbose — print sample rate, file length, and per-bit detector powers
