@@ -8,7 +8,7 @@ Graduate student pursuing dual M.S. degrees in **Computer Science** and **Cybers
 
 ## 📁 Data Structures
 
-Implementations of core data structures in C/C++ from **CS 163 — Data Structures**.
+Implementations of core data structures in C/C++ from **CS 163 & 302 — Data Structures**.
 
 | Project | Description |
 |---|---|
