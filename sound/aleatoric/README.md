@@ -18,6 +18,7 @@ Bass (--bass): Adds a bass note (chord root, two octaves lower) layered under th
 Harmony (--harmony): For each melody note, adds the closest chord tone at or below it, found by building chord tones across two octaves and taking the max that does not exceed the melody note
 
 How It Went
+
 The song-structure groundwork came together cleanly once I separated concerns: one function returns the ordered list of line letters, another returns a chord progression, and main() maps letters to progressions in a dictionary. Representing chords as Roman numerals and calculating roots/thirds/fifths from the key (rather than hardcoding every chord) kept the note logic compact.
 The main challenges were:
 
@@ -27,6 +28,7 @@ Combining multiple tracks (melody, bass, harmony) so they line up sample-for-sam
 Generating white noise correctly for percussion experiments (scaling to int16 amplitude before casting, and centering the noise around zero)
 
 What Is Still To Be Done
+
 The core assignment and the bass and harmony bonuses are complete. Remaining optional extras not yet implemented:
 
 Rhythm (--rhythm): Random note patterns per verse/chorus instead of straight eighth notes
@@ -34,9 +36,12 @@ Percussion (--drums): White-noise drum track (prototype tested, not yet integrat
 MIDI (--midi): Acting as a MIDI controller via mido/python-rtmidi
 
 Usage
-python3 aleatoric.py [-o OUTPUT] [-b] [-a] [-v]
 
+`python3 aleatoric.py [-o OUTPUT] [-b] [-a] [-v]`
+
+```
 -o, --output FILENAME.wav — write the performance to a WAV file instead of playing it
 -b, --bass — add a bass line
 -a, --harmony — add harmony notes
 -v, --verbose — print the generated form, progressions, key, and tempo
+```
