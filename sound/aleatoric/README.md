@@ -1,16 +1,16 @@
-CS516 Assignment 3 - Aleatoric Music Generator
-Name: Trenton Frizzell
+# Aleatoric Music Generator
+Trenton Frizzell
 
 This program procedurally generates aleatoric music using random number generation to guide song structure, then synthesizes the result with sawtooth waves.
 
 The program:
 
-Randomly picks one of three song forms ("AABB/CC", "ABAB/CD", "AB/CDDD")
-Assigns each unique line letter its own randomly chosen four-chord progression, with no two letters sharing a progression (handled by shuffling the progression list and popping from it)
-Picks a random key (MIDI note in the A3-A4 range) and a random tempo (80-160 BPM)
-Generates an eighth-note melody, picking a note from the current chord with probability 0.8, otherwise a note from the major scale
-Converts each MIDI note to a frequency, synthesizes a sawtooth wave with scipy.signal.sawtooth, and joins the notes into one continuous audio array
-Plays the result directly through the speakers using sounddevice, or writes it to a WAV file (mono, 48000sps, 16-bit) when invoked with --output FILENAME.wav
+* Randomly picks one of three song forms ("AABB/CC", "ABAB/CD", "AB/CDDD")
+* Assigns each unique line letter its own randomly chosen four-chord progression, with no two letters sharing a progression (handled by shuffling the progression list and popping from it)
+* Picks a random key (MIDI note in the A3-A4 range) and a random tempo (80-160 BPM)
+* Generates an eighth-note melody, picking a note from the current chord with probability 0.8, otherwise a note from the major scale
+* Converts each MIDI note to a frequency, synthesizes a sawtooth wave with scipy.signal.sawtooth, and joins the notes into one continuous audio array
+* Plays the result directly through the speakers using sounddevice, or writes it to a WAV file (mono, 48000sps, 16-bit) when invoked with --output FILENAME.wav
 
 Bonus features implemented
 
